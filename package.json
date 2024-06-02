@@ -4,7 +4,8 @@
   "description": "Reads and update contents of a excel sheet",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "Lemasani",
   "license": "ISC",
