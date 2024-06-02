@@ -1,11 +1,13 @@
 import { useState } from "react"
 import axios from "./../Api/axios";
+import Loader from "../Componets/Loader";
 // import axios from "axios"
 
 
 export default function Upload() {
     const [btnMchango, setBtnMchango] = useState(false)
     const [File, setFile] = useState()
+    const [loading, isLoading] = useState(false)
 
     
 
@@ -14,12 +16,14 @@ export default function Upload() {
     }
     function submitMchango(event) {
         event.preventDefault();
+        isLoading(true)
         const formData = new FormData();
         formData.append('file', File);
         console.log(formData);
-        axios.post('/read', formData)
+        axios.post('/post', formData)
             .then((response) => {
                 console.log(response.data);
+                isLoading(false)
             })
             .catch((error) => {
                 console.error(error);
@@ -40,7 +44,7 @@ export default function Upload() {
                     <input type="file" className='p-5' placeholder="Upload"
                     onChange={(e)=> setFile(e.target.files[0])}/>
 
-                    <button className="btn backdrop-blur-10 p-2 bg-slate-300 w-20 self-center rounded-lg" onClick={submitMchango}>Submit</button>
+                    <button className="btn backdrop-blur-10 p-2 bg-slate-300 w-30 self-center rounded-lg flex gap-6 " onClick={submitMchango}>Upload {loading && <Loader/>}</button>
 
                 </div>}
 
