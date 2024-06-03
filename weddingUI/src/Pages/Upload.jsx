@@ -8,8 +8,8 @@ export default function Upload() {
     const [btnMchango, setBtnMchango] = useState(false)
     const [File, setFile] = useState()
     const [loading, isLoading] = useState(false)
-
     
+
 
     function displayMchango (){
         setBtnMchango(prevState => !prevState) 
@@ -23,12 +23,14 @@ export default function Upload() {
         axios.post('/post', formData)
             .then((response) => {
                 console.log(response.data);
+                
                 isLoading(false)
             })
             .catch((error) => {
                 console.error(error);
             });
     }
+
 
   return (
     <>
@@ -47,6 +49,8 @@ export default function Upload() {
                     <button className="btn backdrop-blur-10 p-2 bg-slate-300 w-30 self-center rounded-lg flex gap-6 " onClick={submitMchango}>Upload {loading && <Loader/>}</button>
 
                 </div>}
+
+                
 
             </div>
         </div>

@@ -10,7 +10,7 @@ const port = 3000;
 
 const upload = multer({ dest: 'uploads/' });
 
-app.post('/read', upload.single('file'), (req, res) => {
+app.post('/post', upload.single('file'), (req, res) => {
     try {
         const filePath = req.file.path;
         const results = [];
@@ -53,6 +53,27 @@ app.post('/read', upload.single('file'), (req, res) => {
     });
 });
 
+
+app.get('/view', (req, res) => {
+    try {
+        const jsonData = fs.readFileSync('output.json', 'utf8');
+        if (!jsonData) {
+            res.status(400).json({ error: 'File is empty' });
+            return;
+        }
+        let parsedData;
+        try {
+            parsedData = JSON.parse(jsonData);
+        } catch (error) {
+            res.status(400).json({ error: 'Invalid JSON' });
+            return;
+        }
+        res.json(parsedData);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while reading the file' });
+    }
+});
 
 app.get('/download', (req, res) => {
     fs.readFile('output.json', 'utf8', (err, data) => {
