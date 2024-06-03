@@ -8,6 +8,11 @@ const { Parser } = require('json2csv');
 const app = express();
 const port = 3000;
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'weddingUI/dist')));
+
+
+
 const upload = multer({ dest: 'uploads/' });
 
 app.post('/post', upload.single('file'), (req, res) => {
@@ -93,7 +98,11 @@ app.get('/download', (req, res) => {
     });
 });
 
-
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/weddingUI/dist/index.html'));
+  });
 
 
 app.listen(port, () => {
