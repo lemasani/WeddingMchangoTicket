@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<RootLayout><Home /></RootLayout>} />
         <Route path="/upload" element={<RootLayout><Upload /></RootLayout>} />
-        <Route path="/view" element={<RootLayout><View /></RootLayout>} />
+        <Route path="/Viewuploaded" element={<RootLayout><View /></RootLayout>} />
       </Routes>
     </Router>
   );
